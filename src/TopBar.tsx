@@ -2,34 +2,21 @@ import { Setter, createSignal } from "solid-js";
 
 function getBaudList() { 
     return [
-        "4800", "9600", "19200", "38400", "57600", "112500", "230400", "460800", "921600"
+        "4800", "9600", "19200", "38400", "57600", "112500", "230400", "460800", "921600", "1000000", "2000000", "3000000"
     ];
 }
 
 function PortSelect(ports: Array<string>, port: string, setPort:Setter<string>)
 {
-    console.log(ports);
-    console.log(port);
-
     return (
-        <li>
-            <details>
-            <summary>
-                {port !== "" ? "Port" : port}
-            </summary>
-            <ul className="p-2 bg-base-100 rounded-t-none">
-                <li><label onClick={(e) => {
-                    console.log(e.target.textContent);
-                }}>COM3</label></li>
-                <li><label onClick={(e) => {
-                    console.log(e.target.textContent);
-                }}>COM4</label></li>
-                <li><label onClick={(e) => {
-                    console.log(e.target.textContent);
-                }}>COM5</label></li>
+        <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-accent rounded-btn">{port !== "" ? "Port" : port}</div>
+            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                <li><label>COM3</label></li>
+                <li><label>COM4</label></li>
+                <li><label>COM5</label></li>
             </ul>
-            </details>
-        </li>
+        </div>
     );
 }
 
@@ -43,16 +30,12 @@ function BaudSelect(baudRate: string, setBaudRate:Setter<string>)
     })
 
     return (
-        <li>
-            <details>
-            <summary>
-                {baudRate !== "" ? "Baud Rate" : baudRate}
-            </summary>
-            <ul className="p-2 bg-base-100 rounded-t-none">
+        <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-accent rounded-btn">{baudRate !== "" ? "Baud Rate" : baudRate}</div>
+            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                 {listItems}
             </ul>
-            </details>
-        </li>
+        </div>
     );
 }
 
@@ -102,7 +85,7 @@ export default function TopBar(ports: string[], port: string, setPort:Setter<str
                         </ul>
                         </details>
                     </li>
-                    <li><button className="btn btn-secondary rounded-full">Connect</button></li>
+                    <li><button className="btn btn-secondary rounded-btn">Connect</button></li>
                 </ul>
             </div>
             <label className="swap swap-rotate">
